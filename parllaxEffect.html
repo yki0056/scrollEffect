@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+</head>
+<style>
+    @font-face {
+        font-family: 'NEXONLv1Gothic';
+        font-weight: 300;
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'NEXONLv1Gothic';
+        font-weight: 400;
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .parallax {
+        background: #222;
+        color: #fff;
+        font-family: 'NEXONLv1Gothic';
+        font-weight: 400;
+        overflow-x: hidden;
+    }
+
+    #paraHeader {
+        position: absolute;
+        padding: 20px;
+    }
+
+    #paraHeader h1 {
+        display: inline-block;
+        font-size: 20px;
+        border-bottom: 1px dashed #fff;
+        margin-bottom: 8px;
+    }
+
+    #paraCont {
+        max-width: 1600px;
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #paraTitle {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #paraTitle h2 {
+        font-size: 8vw;
+        text-transform: uppercase;
+
+    }
+
+    #paraTitle h2 em {
+        display: block;
+        font-family: 'Lato';
+        font-weight: 100;
+        padding-left: 18vw;
+    }
+
+
+    .content__item {
+        width: 1000px;
+        max-width: 70vw;
+        margin: 30vw 0;
+        /* background: rgba(255,255,255,0.3); */
+        text-align: right;
+        position: relative;
+        padding-top: 10vw;
+    }
+
+    .content__item:nth-child(even) {
+        margin-left: auto;
+        text-align: left;
+    }
+
+    .content__item__num {
+        font-family: 'Lato';
+        font-size: 25vw;
+        opacity: 0.07;
+        position: absolute;
+        right: -5vw;
+        top: -10vw;
+        transform: translateY(200px);
+        transition: all 1s .1s cubic-bezier(0, 0.66, 0.38, 1.01);
+    }
+
+
+    .content__item:nth-child(even) .content__item__num {
+        right: auto;
+        left: -5vw;
+    }
+
+    .content__item__title {
+        padding-bottom: 1vw;
+        font-size: 2vw;
+        position: relative;
+        z-index: 5;
+    }
+
+    .content__item__imgWrap {
+        width: 90%;
+        padding-bottom: 56%;
+        /*background: #000;*/
+        position: relative;
+        overflow: hidden;
+    }
+
+    .content__item__img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 140%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: saturate(0%);
+        transition: all 1s;
+    }
+
+    .content__item__img:hover {
+        filter: saturate(100%);
+    }
+
+    .content__item__desc {
+        font-size: 4vw;
+        line-height: 1.4;
+        word-break: keep-all;
+        margin-top: -6vw;
+        margin-right: -3vw;
+        position: relative;
+        z-index: 100;
+    }
+
+    .content__item:nth-child(even) .content__item__desc {
+        margin-right: 0;
+        margin-left: -3vw;
+    }
+
+    .content__item:nth-child(1) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg11.jpg);
+    }
+
+    .content__item:nth-child(2) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg12.jpg);
+    }
+
+    .content__item:nth-child(3) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg13.jpg);
+    }
+
+    .content__item:nth-child(4) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg14.jpg);
+    }
+
+    .content__item:nth-child(5) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg15.jpg);
+    }
+
+    .content__item:nth-child(6) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg16.jpg);
+    }
+
+    .content__item:nth-child(7) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg17.jpg);
+    }
+
+    .content__item:nth-child(8) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg18.jpg);
+    }
+
+    .content__item:nth-child(9) .content__item__img {
+        background-image: url(https://webstoryboy.github.io/wtss/refer-effect/assets/img/bg19.jpg);
+    }
+
+    /* nav */
+    .paraNav {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, .4);
+        padding: 15px 20px;
+        border-radius: 50px;
+        transition: right 0.4s ease;
+    }
+
+    /*닷매뉴숨기기*/
+    .paraNav.hide {
+        right: -300px;
+    }
+
+    .paraNav li {
+        display: inline-block;
+        list-style: none;
+    }
+
+    .paraNav li a {
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        padding: 5px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .paraNav li.active a {
+        background: #fff;
+        color: #000;
+        border-radius: 50%;
+    }
+
+    /* info */
+    .paraScroll {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, .4);
+        color: #fff;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 12px;
+        padding: 0px 20px;
+    }
+
+    .paraInfo {
+        position: fixed;
+        left: 20px;
+        bottom: 70px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, .4);
+        color: #fff;
+        padding: 20px;
+        font-size: 12px;
+        line-height: 1.8;
+        border-radius: 10px;
+    }
+
+    .paraInfo li {
+        list-style: none;
+    }
+
+
+    /*스크롤 애니메이션*/ 
+    /* section1  image emerge animation 일단 모두 숨기기 */
+    #section1 .content__item__num {
+        opacity: 0;
+        transform: translateY(200px);
+        transition: all 1s .1s cubic-bezier(0, 0.66, 0.38, 1.01);
+    }
+
+    #section1 .content__item__title {
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: all 1s .3s cubic-bezier(0, 0.66, 0.38, 1.01);
+    }
+
+    #section1 .content__item__imgWrap {
+        opacity: 0;
+        transform: translateY(200px) rotate(30deg) skew(20deg);
+        transition: all 1s .6s cubic-bezier(0, 0.66, 0.38, 1.01);
+    }
+
+    #section1 .content__item__desc {
+        opacity: 0;
+        transform: translateX(-200px);
+        transition: all 1s .9s cubic-bezier(0, 0.66, 0.38, 1.01);
+    }
+
+    /*.show 클래스 넣을시 보이게하기 */
+    #section1.show .content__item__num {
+        opacity: 0.07;
+        transform: translateY(0);
+    }
+
+    #section1.show .content__item__title {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    #section1.show .content__item__imgWrap {
+        opacity: 1;
+        transform: translateY(0) rotate(0) skew(0);
+    }
+
+    #section1.show .content__item__desc {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+
+    /*section4 text animation*/
+    #section4 .content__item__desc span {
+        opacity: 0;
+        display: inline-block;
+        min-width: 1.2vw;
+    }
+
+    #section4 .content__item__desc span.show {
+        opacity: 1;
+        animation: flip;
+        animation-duration: 2s;
+    }
+
+    /*section5 */
+     #section5>figure>div, #section5>div>p {
+        opacity: 0;
+    }
+     #section5.show > figure > div{
+        animation: sec5Ani 1s linear forwards;
+    }
+    #section5.show > div> p {
+        animation: sec5Ani 2.5s linear forwards;
+    }
+    @keyframes sec5Ani {
+        0%{opacity:0;}
+        60%{opacity:0;}
+        70%{opacity:1;}
+        100%{opacity:1;}
+    }
+    /*slide color*/
+    #section5>div{
+        position:relative;
+    }
+    #section5>figure::before{
+        content:'';
+        position: absolute;
+        top:0; 
+        left: 0;
+        width: 0;
+        height:100%;
+        z-index: 10;
+        background-color: #fff;
+    }
+    #section5>div::before{
+        content:'';
+        position: absolute;
+        top:0; 
+        right: 0;
+        width: 0%;
+        height:100%;
+        z-index: 10;
+        background-color: #fff;
+    }
+    #section5.show > figure::before{
+        animation: colorSlide 1s cubic-bezier(0.77, 0, 0.165, 1);
+    }
+    #section5.show >div::before{
+        animation: colorSlide2 1s 1s cubic-bezier(0.77, 0, 0.165, 1); 
+    }
+    @keyframes colorSlide {
+        0%{width:0; left:0}
+        50%{width:100%; left:0}
+        80%{width:100%; left:0}
+        100%{width:0%; left:100%;}
+    }
+    @keyframes colorSlide2 {
+        0%{width:0; right:0}
+        50%{width:95%; right:0}
+        80%{width:95%; right:0}
+        100%{width:0%; right:100%;}
+    }
+ 
+</style>
+
+<body class="parallax">
+    <!-- fixed side info -->
+    <div class="paraScroll">scrollTop() : <span>0</span>px</div>
+
+    <div class="paraInfo">
+        <ul>
+            <li>#section1 offset() : <span class="offset1">0</span></li>
+            <li>#section2 offset() : <span class="offset2">0</span></li>
+            <li>#section3 offset() : <span class="offset3">0</span></li>
+            <li>#section4 offset() : <span class="offset4">0</span></li>
+            <li>#section5 offset() : <span class="offset5">0</span></li>
+        </ul>
+    </div>
+    <!-- //info -->
+    <header id="paraHeader">
+        <h1>Scroll Effect - Javascript</h1>
+        <p>moving menu dot</p>
+    </header>
+    <!-- //header -->
+    <div id="paraTitle">
+        <h2>Parallax <em>Scrolling</em></h2>
+    </div>
+    <!-- nav -->
+    <nav class="paraNav">
+        <ul>
+            <li class="active"><a href="#section1">s1</a></li>
+            <li><a href="#section2">s2</a></li>
+            <li><a href="#section3">s3</a></li>
+            <li><a href="#section4">s4</a></li>
+            <li><a href="#section5">s5</a></li>
+
+        </ul>
+    </nav>
+    <!-- //nav -->
+    <main id="paraCont">
+        <section id="section1" class="content__item">
+            <span class="content__item__num">01</span>
+            <h2 class="content__item__title">Section1</h2>
+            <figure class="content__item__imgWrap">
+                <div class="content__item__img"></div>
+            </figure>
+            <p class="content__item__desc"> All you need in this life is ignorance and confidence; then success is sure.
+                <br>-- Mark Twain</br>
+            </p>
+        </section>
+        <!-- //section1 -->
+        <section id="section2" class="content__item">
+            <span class="content__item__num">02</span>
+            <h2 class="content__item__title">Section2</h2>
+            <figure class="content__item__imgWrap">
+                <div class="content__item__img"></div>
+            </figure>
+            <p class="content__item__desc">Better the last smile than the first laughter.
+                <br>-- John Ray</br>
+            </p>
+        </section>
+        <!-- //section2 -->
+        <section id="section3" class="content__item">
+            <span class="content__item__num">03</span>
+            <h2 class="content__item__title">Section3</h2>
+            <figure class="content__item__imgWrap">
+                <div class="content__item__img"></div>
+            </figure>
+            <p class="content__item__desc">The mind is not a vessel to be filled but a fire to be kindled.
+                <br>-- Plutarch</br>
+            </p>
+        </section>
+        <!-- //section3 -->
+        <section id="section4" class="content__item">
+            <span class="content__item__num">04</span>
+            <h2 class="content__item__title">Section4</h2>
+            <figure class="content__item__imgWrap">
+                <div class="content__item__img"></div>
+            </figure>
+            <p class="content__item__desc">Courage is very important. Like a muscle, it is strengthened by use.                        --RuthGordon</p>
+        </section>
+        <!-- //section4 -->
+        <section id="section5" class="content__item">
+            <span class="content__item__num">05</span>
+            <h2 class="content__item__title">Section5</h2>
+            <figure class="content__item__imgWrap">
+                <div class="content__item__img"></div>
+            </figure>
+                <div class="content__item__desc">
+                    <p >One man who has a mind and knows it can always beat ten men who haven't and don't.
+                        <br>-- George Bernard</br>
+                    </p> 
+                </div>
+        </section>
+        <!-- //section5 -->
+    </main>
+    <!-- //main -->
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="pjqueryJs.js"></script>
+<!--
+<script src="pureJs.js"></script>
+-->
+
+
+</html>

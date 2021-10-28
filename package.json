@@ -1,0 +1,19 @@
+{
+  "name": "scrollevent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pjqueryJs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yki0056/scrollEffect.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yki0056/scrollEffect/issues"
+  },
+  "homepage": "https://github.com/yki0056/scrollEffect#readme"
+}
